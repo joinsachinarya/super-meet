@@ -44,16 +44,14 @@ section {
 }
 
 .about,
-.services,
 .skills,
-.teams,
+.projects,
 .contact,
 footer {
     font-family: 'Poppins', sans-serif;
 }
 
 .about .about-content,
-.services .serv-content,
 .skills .skills-content,
 .contact .contact-content {
     display: flex;
@@ -247,37 +245,10 @@ section .title::after {
     border-radius: 25px;
     margin-top: 45px;
     cursor: pointer;
+    border: 5px solid #3586ff;
+    box-sizing: border-box;
 }
 
-.classbox::before {
-    content: '';
-    position: absolute;
-    width: 68px;
-    height: 500%;
-    border-radius: 0;
-    background: linear-gradient(#00ccff, #d400d4);
-    animation: animate-rotate 4s linear infinite;
-
-}
-
-.classbox::after {
-    content: '';
-    position: absolute;
-    inset: 4px;
-    background: #0e1538;
-    /* background: crimson; */
-    border-radius: 20px;
-}
-
-@keyframes animate-rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
 
 .classbox a {
     text-decoration: none;
@@ -289,7 +260,7 @@ section .title::after {
 
 /* about section styling */
 .about .title::after {
-    content: "who i am";
+    content: "Who Am I ?";
 }
 
 .about .about-content .left {
@@ -309,6 +280,12 @@ section .title::after {
 
 .about .about-content .right .text {
     font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.text-skills {
+    font-size: 20px;
     font-weight: 600;
     margin-bottom: 10px;
 }
@@ -343,353 +320,10 @@ section .title::after {
 }
 
 
-/* services section styling */
-.services,
-.teams {
-    color: #fff;
-    background: #111;
-}
-
-.services .title::before,
-.teams .title::before {
-    background: #fff;
-}
-
-.services .title::after,
-.teams .title::after {
-    background: #111;
-    content: "what i provide";
-}
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 40px 0;
-    background: #111;
-    cursor: pointer;
-}
-
-.container .box {
-    position: relative;
-    width: 320px;
-    height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 40px 30px;
-    transition: 0.5s;
-}
-
-.container .box::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50px;
-    width: 50%;
-    height: 100%;
-    background: #fff;
-    border-radius: 8px;
-    transition: 0.5s;
-    transform: skewX(15deg);
-}
-
-.container .box::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50px;
-    width: 50%;
-    height: 100%;
-    background: #fff;
-    border-radius: 8px;
-    transition: 0.5s;
-    transform: skewX(15deg);
-    filter: blur(30px);
-    transition: 0.5s;
-}
-
-.container .box:hover:before,
-.container .box:hover:after {
-    transform: skewX(0deg);
-    left: 20px;
-    width: calc(100% - 90px);
-}
-
-.container .box:nth-child(1):before,
-.container .box:nth-child(1):after {
-    background: linear-gradient(315deg, #ffbc00, #ff0058);
-}
-
-.container .box:nth-child(2):before,
-.container .box:nth-child(2):after {
-    background: linear-gradient(315deg, #03a9f4, #ff0058);
-}
-
-.container .box:nth-child(3):before,
-.container .box:nth-child(3):after {
-    background: linear-gradient(315deg, #4dff03, #00d0ff);
-}
-
-.container .box:nth-child(4):before,
-.container .box:nth-child(4):after {
-    background: linear-gradient(315deg, #eecda3, #ef629f);
-}
-
-.container .box:nth-child(5):before,
-.container .box:nth-child(5):after {
-    background: linear-gradient(-315deg, #c33764, #1d2671);
-}
-
-.container .box:nth-child(6):before,
-.container .box:nth-child(6):after {
-    background: linear-gradient(315deg, #36d1dc, #5b86e5);
-}
-
-.container .box .content {
-    position: relative;
-    left: 0;
-    padding: 20px 40px;
-    background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    backdrop-filter: blur(10ox);
-    z-index: 1;
-    transition: 0.5s;
-    color: #fff;
-
-}
-
-.container .box:hover .content {
-    left: -25px;
-    padding: 60px 40px;
-}
-
-.container .box .content h2 {
-    font-size: 2em;
-    color: #fff;
-    margin-bottom: 10px;
-}
-
-.container .box .content p {
-    font-size: 1.1em;
-    margin-bottom: 10px;
-    line-height: 1.4em;
-    padding: 12px;
-}
-
-.container .box .content a {
-    display: inline-block;
-    font-size: 1.1em;
-    color: #111;
-    background: #fff;
-    padding: 10px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 700;
-    margin-top: 5px;
-}
-
-.container .box span {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 50;
-    pointer-events: none;
-
-}
-
-.container .box span::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    opacity: 0;
-    transition: 0.5s;
-    animation: animate 2s ease-in-out infinite;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 05);
-}
-
-.container .box:hover #first::before {
-    top: -50px;
-    left: 50px;
-    width: 100px;
-    height: 100px;
-    opacity: 1;
-    background: url("https://cdn.icon-icons.com/icons2/2334/PNG/512/pen_tool_anchor_point_design_icon_142354.png") no-repeat;
-    background-size: 100px;
-    background-position: center;
-    filter: invert(100%);
-}
-
-.container .box:hover #second::before {
-    top: -50px;
-    left: 50px;
-    width: 100px;
-    height: 100px;
-    opacity: 1;
-    background: url("https://cdn.icon-icons.com/icons2/1145/PNG/512/codeoutlinedprogrammingsigns_81143.png") no-repeat;
-    background-size: 100px;
-    background-position: center;
-    filter: invert(100%);
-}
-
-.container .box:hover #third::before {
-    top: -50px;
-    left: 50px;
-    width: 100px;
-    height: 100px;
-    opacity: 1;
-    background: url("https://cdn.icon-icons.com/icons2/2066/PNG/512/search_icon_125165.png") no-repeat;
-    background-size: 100px;
-    background-position: center;
-    filter: invert(100%);
-}
-
-.container .box:hover #fourth::before {
-    top: -50px;
-    left: 50px;
-    width: 100px;
-    height: 100px;
-    opacity: 1;
-    background: url("https://cdn.icon-icons.com/icons2/935/PNG/512/video-camera-outline_icon-icons.com_73112.png") no-repeat;
-    background-size: 100px;
-    background-position: center;
-    filter: invert(100%);
-}
-
-.container .box:hover #fifth::before {
-    top: -50px;
-    left: 50px;
-    width: 100px;
-    height: 100px;
-    opacity: 1;
-    background: url("https://cdn.icon-icons.com/icons2/620/PNG/512/bars-chart-ascending_icon-icons.com_56865.png") no-repeat;
-    background-size: 100px;
-    background-position: center;
-    filter: invert(100%);
-}
-
-.container .box:hover #sixth::before {
-    top: -50px;
-    left: 50px;
-    width: 100px;
-    height: 100px;
-    opacity: 1;
-    background: url("https://cdn.icon-icons.com/icons2/936/PNG/512/android-character-symbol_icon-icons.com_73684.png") no-repeat;
-    background-size: 100px;
-    background-position: center;
-    filter: invert(100%);
-}
-
-.container .box span::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    opacity: 0;
-    transition: 0.5s;
-    animation: animate 2s ease-in-out infinite;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 05);
-    animation-delay: -1s;
-}
-
-.container .box:hover #sixth::after {
-    bottom: -50px;
-    right: 50px;
-    width: 100px;
-    height: 100px;
-    opacity: 1;
-    background: url("https://cdn.icon-icons.com/icons2/936/PNG/512/android-character-symbol_icon-icons.com_73684.png") no-repeat;
-    background-size: 100px;
-    background-position: center;
-}
-
-.container .box:hover #fifth::after {
-    bottom: -50px;
-    right: 50px;
-    width: 100px;
-    height: 100px;
-    opacity: 1;
-    background: url("https://cdn.icon-icons.com/icons2/620/PNG/512/bars-chart-ascending_icon-icons.com_56865.png") no-repeat;
-    background-size: 100px;
-    background-position: center;
-}
-
-.container .box:hover #fourth::after {
-    bottom: -50px;
-    right: 50px;
-    width: 100px;
-    height: 100px;
-    opacity: 1;
-    background: url("https://cdn.icon-icons.com/icons2/935/PNG/512/video-camera-outline_icon-icons.com_73112.png") no-repeat;
-    background-size: 100px;
-    background-position: center;
-}
-
-.container .box:hover #third::after {
-    bottom: -50px;
-    right: 50px;
-    width: 100px;
-    height: 100px;
-    opacity: 1;
-    background: url("https://cdn.icon-icons.com/icons2/2066/PNG/512/search_icon_125165.png") no-repeat;
-    background-size: 100px;
-    background-position: center;
-}
-
-.container .box:hover #second::after {
-    bottom: -50px;
-    right: 50px;
-    width: 100px;
-    height: 100px;
-    opacity: 1;
-    background: url("https://cdn.icon-icons.com/icons2/1145/PNG/512/codeoutlinedprogrammingsigns_81143.png") no-repeat;
-    background-size: 100px;
-    background-position: center;
-}
-
-.container .box:hover #first::after {
-    bottom: -50px;
-    right: 50px;
-    width: 100px;
-    height: 100px;
-    opacity: 1;
-    background: url("https://cdn.icon-icons.com/icons2/2334/PNG/512/pen_tool_anchor_point_design_icon_142354.png") no-repeat;
-    background-size: 100px;
-    background-position: center;
-}
-
-@keyframes animate {
-
-    0%,
-    100% {
-        transform: translateY(10px);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
 /* skills section styling */
 
 .skills .title::after {
-    content: "what i know";
+    content: "What I Know ?";
 }
 
 .skills .skills-content .column {
@@ -773,33 +407,38 @@ section .title::after {
     width: 90%;
 }
 
-.skills-content .right .css::before {
-    width: 60%;
-}
-
 .skills-content .right .js::before {
-    width: 50%;
+    width: 80%;
 }
 
-.skills-content .right .php::before {
-    width: 50%;
+.skills-content .right .react::before {
+    width: 75%;
 }
 
-.skills-content .right .mysql::before {
-    width: 85%;
+.skills-content .right .nodejs::before {
+    width: 70%;
 }
 
-.skills-content .right .wordpress::before {
+.skills-content .right .mdb::before {
+    width: 70%;
+}
+
+.skills-content .right .git::before {
+    width: 75%;
+}
+
+.skills-content .right .cpp::before {
     width: 75%;
 }
 
 
+
 /* projects section styling */
-.teams .title::after {
+.projects .title::after {
     content: "Projects Done";
 }
 
-.teams .carousel .card {
+.projects .carousel .card {
     background: #222;
     border-radius: 6px;
     padding: 25px 35px;
@@ -808,7 +447,7 @@ section .title::after {
     transition: all 0.3s ease;
 }
 
-.teams .carousel .card .box {
+.projects .carousel .card .box {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -816,13 +455,13 @@ section .title::after {
     transition: all 0.3s ease;
 }
 
-.teams .carousel .card .text {
+.projects .carousel .card .text {
     font-size: 25px;
     font-weight: 500;
     margin: 10px 0 7px 0;
 }
 
-.teams .carousel .card img {
+.projects .carousel .card img {
     height: 150px;
     width: 150px;
     object-fit: cover;
@@ -831,7 +470,7 @@ section .title::after {
     transition: all 0.3s ease;
 }
 
-.teams .carousel .card:hover img {
+.projects .carousel .card:hover img {
     border-color: #fff;
 }
 
@@ -860,7 +499,7 @@ section .title::after {
     background: crimson !important;
 }
 
-.teams .carousel .card .box .project {
+.projects .carousel .card .box .project {
     display: inline-block;
     color: crimson;
     font-size: 18px;
@@ -872,7 +511,7 @@ section .title::after {
     transition: 0.3s ease-in-out;
 }
 
-.teams .carousel .card .box .project:hover {
+.projects .carousel .card .box .project:hover {
     color: white;
     background: crimson;
 }
@@ -884,7 +523,7 @@ textarea {
 }
 
 .contact .title::after {
-    content: "get in touch";
+    content: "Get In Touch";
 }
 
 .contact .contact-content .column {
@@ -1095,77 +734,7 @@ footer p a:hover {
     transform: rotateX(10px);
 }
 
-footer .wave {
-    position: absolute;
-    top: -100px;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    /* background: url("https://ftl.deekshith.eu.org/354310/None?hash=AgADY7"); */
-    background-size: 1000px 100px;
-}
 
-footer .wave#wave1 {
-    z-index: 1000;
-    opacity: 1;
-    bottom: 0;
-    animation: animatewave 4s linear infinite;
-}
-
-footer .wave#wave2 {
-    z-index: 999;
-    opacity: 0.5;
-    bottom: 10px;
-    animation: animatewave_02 4s linear infinite;
-}
-
-footer .wave#wave3 {
-    z-index: 1000;
-    opacity: 0.2;
-    bottom: 15px;
-    animation: animatewave 3s linear infinite;
-}
-
-footer .wave#wave4 {
-    z-index: 999;
-    opacity: 0.7;
-    bottom: 20px;
-    animation: animatewave_02 3s linear infinite;
-}
-
-@keyframes animatewave {
-    0% {
-        background-position-x: 1000px;
-    }
-
-    100% {
-        background-position-x: 0px;
-    }
-}
-
-@keyframes animatewave_02 {
-    0% {
-        background-position-x: 0px;
-    }
-
-    100% {
-        background-position-x: 1000px;
-    }
-}
-
-/* pr loader design  */
-/* #preloader { */
-/* background: url("img/e3a.gif") no-repeat center; */
-/* background-size: 15%;
-    filter: invert(100%);
-    background-color: #fff;
-    height: 100vh;
-    width: 100%;
-    position: fixed;
-    cursor: pointer;
-    z-index: 1000; */
-/* border-radius: 12px; */
-/* } */
 
 /* responsive media query start */
 @media (max-width: 1104px) {
@@ -1248,10 +817,6 @@ footer .wave#wave4 {
         flex: 100%;
     }
 
-    .services .serv-content .card {
-        width: calc(50% - 10px);
-        margin-bottom: 20px;
-    }
 
     .skills .skills-content .column,
     .contact .contact-content .column {
@@ -1282,9 +847,6 @@ footer .wave#wave4 {
         height: 88px;
     }
 
-    .services .serv-content .card {
-        width: 100%;
-    }
 }
 
 @media (max-width: 500px) {
