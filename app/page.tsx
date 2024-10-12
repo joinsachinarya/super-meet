@@ -1,9 +1,12 @@
-import Navbar from "./components/navbar/navbar";
+import About from "./components/about/about";
+import Home from "./components/home/home";
 
-export default function Home() {
+
+export default function HomePage() {
   return (
-    <div className="flex justify-between">
-      <Navbar />
+    <div className="min-h-screen flex flex-col justify-center  items-center">
+      <Home />
+      <About />
     </div>
   );
 }

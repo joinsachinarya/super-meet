@@ -1,34 +1,32 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
+import Navbar from "./components/navbar/navbar";
+import SiteHeader from "./components/site-header/site-header";
+import { ThemeProvider } from "./components/theme-provider/theme-provider";
 import "./globals.css";
+import { IBM_Plex_Mono } from "next/font/google";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const ibm_plex_mono = IBM_Plex_Mono({
+  weight: "400",
+  subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Portfolio | Sachin Arya",
-  description: "Portfolio page for Sachin Arya",
+export const metadata = {
+  title: "Sachin Arya",
+  description: "Sachin Arya Portfolio Website",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: any) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={ibm_plex_mono.className}>
+        <ThemeProvider attribute="class" defaultTheme="dark">
+          <main className="text-foreground">
+            <SiteHeader />
+            <div className="w-full">
+              <Navbar />
+              {children}
+            </div>
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,67 +1,63 @@
-"use client"
-
-import React from 'react'
-import { useState } from "react";
+// Navbar.js
+"use client";
+import React from "react";
+import { AiOutlineHome } from "react-icons/ai";
+import { MdWorkOutline } from "react-icons/md";
+import { BsCardText } from "react-icons/bs";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
 
-type NavbarProps = {
-}
-
-const Navbar: React.FC<NavbarProps> = () => {
-
-  let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
-  let links = [
+const Navbar = () => {
+  const pathname = usePathname();
+  const navbarItems = [
     {
-      name: "About",
-      link: "#about",
+      key: "1",
+      title: "Home",
+      icon: <AiOutlineHome />,
+      href: "/",
+    },
+    // {
+    //   key: "2",
+    //   title: "About",
+    //   icon: <AiOutlineInfoCircle />,
+    // },
+    {
+      key: "3",
+      title: "Work",
+      icon: <MdWorkOutline />,
+      href: "/work",
     },
     {
-      name: "Work Experience & Projects",
-      link: "#work-experience-and-projects",
-    },
-
-    {
-      name: "Blogs & Videos",
-      link: "#blogs-and-videos",
-    },
-    {
-      name: "Contact",
-      link: "#contact",
+      key: "4",
+      title: "Blog",
+      icon: <BsCardText />,
+      href: "/blog-and-videos",
     },
   ];
 
   return (
-    <div className="flex space-x-4 justify-center">
-      {links.map((navLink, index) => (
-        <Link key={navLink.name} href={navLink.link}>
-          <div
-            onMouseEnter={() => setHoveredIndex(index)}
-            onMouseLeave={() => setHoveredIndex(null)}
-            className="relative rounded-xl px-4 py-2 text-sm text-gray-700 transition-all delay-150 hover:text-gray-900"
-          >
-            <AnimatePresence>
-              {hoveredIndex === index && (
-                <motion.span
-                  className="absolute inset-0 rounded-lg bg-gray-100"
-                  layoutId="hoverBackground"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1, transition: { duration: 0.15 } }}
-                  exit={{
-                    opacity: 0,
-                    transition: { duration: 0.15, delay: 0.2 },
-                  }}
-                />
-              )}
-            </AnimatePresence>
+    <nav className="z-50 fixed bottom-0 left-1/2 px-8 py-8 -translate-x-1/2">
+      <div className="p-3 bg-background text-sm rounded-2xl flex gap-4 border-muted border-2 shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px]">
+        {navbarItems.map((item) => {
+          return (
+            <Link key={item.key} href={item.href}>
+              <div
+                key={item.key}
+                className={
+                  "flex gap-2 px-4 py-3 rounded-xl text-foreground justify-center items-center cursor-pointer" +
+                  (pathname === item.href
+                    ? "bg-foreground font-semibold border-[2px] border-muted"
+                    : "bg-background")
+                }
+              >
+                {item.icon} {item.title}
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+    </nav>
+  );
+};
 
-            <span className="relative z-10">{navLink.name}</span>
-          </div>
-        </Link>
-      ))}
-    </div>
-  )
-}
-
-export default Navbar
+export default Navbar;
