@@ -7,12 +7,15 @@ import Logo from './images/logo.svg';
 import Bg from "./images/bg.png";
 import Menu from './images/menu.png';
 import Heading from './images/heading.svg';
-import styles from './styles/home.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Tippy from '@tippyjs/react';
+import { randomIdGenerator } from './utils/random-id-generator';
 
 export default function Home() {
   const router = useRouter();
   const [roomId, setRoomId] = useState('');
+  const [copied, setCopied] = useState(false);
+  const [randomRoomId, setRandomRoomId] = useState('');
 
   const createAndJoin = () => {
     const newRoomId = uuidv4();
@@ -27,29 +30,48 @@ export default function Home() {
     }
   };
 
+  useEffect(() => {
+    if (copied) {
+      setTimeout(() => {
+        setCopied(false)
+      }, 2000)
+    }
+  }, [copied])
+
+  useEffect(() => {
+    setRandomRoomId(randomIdGenerator(10))
+  }, [])
+
   return (
     <>
-
       <div className='relative'>
         <header className='h-[15vh] max-md:h-[10vh] max-md:px-[1vh] max-md:py-[3vh] px-[1vw] py-[1vw]' style={{ display: "flex", justifyContent: "space-between" }}>
           <Image src={Logo} alt='Logo' className='max-md:w-[16vh] max-md:h-[8vh] ' />
-          <a href='https://github.com/RandomThacker/random-meet'><Image src={Menu} alt='Menu' className='w-16 h-16 mr-4  rounded-full' /></a>
+          <a href='https://github.com/joinsachinarya/SuperMeet'><Image src={Menu} alt='Menu' className='w-16 h-16 mr-4  rounded-full' /></a>
         </header>
         <div className='flex flex-col items-center w-full h-[85vh] px-5'>
           <Image src={Heading} alt='Logo' className='justify-center items-center mt-20 max-md:pt-[10vh] ' />
           <h1 className='py-10'>Because Virtual Meetings Can Be Fun Too!</h1>
           <div className="flex flex-row gap-1 mt-10">
-            <input
-              placeholder='Enter Room ID'
-              value={roomId}
-              onChange={(e) => setRoomId(e?.target?.value)}
-              className='rounded-tl-xl rounded-bl-xl text-center'
-              style={{
-                background: "rgba(255, 255, 255, 0.21)",
-                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
-                backdropFilter: "blur(5.4px)",
-              }}
-            />
+            <Tippy interactive content={<div className='flex gap-2 items-center'>
+              <span>{randomRoomId}</span>
+              <button className='bg-purple-600 text-white px-2 py-1 rounded-md' onClick={() => {
+                navigator.clipboard.writeText(randomRoomId)
+                setCopied(true)
+              }}> {copied ? "Copied!" : "Copy"}</button>
+            </div>}>
+              <input
+                placeholder='Enter Room ID'
+                value={roomId}
+                onChange={(e) => setRoomId(e?.target?.value)}
+                className='rounded-tl-xl rounded-bl-xl text-center'
+                style={{
+                  background: "rgba(255, 255, 255, 0.21)",
+                  boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+                  backdropFilter: "blur(5.4px)",
+                }}
+              />
+            </Tippy>
             <button onClick={joinRoom} className='p-3 bg-purple-600 rounded-tr-xl rounded-br-xl'>Join Room</button>
           </div>
 
