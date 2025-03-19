@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "@tippyjs/react": "^4.2.6",
+    "classnames": "^2.5.1",
+    "lucide-react": "^0.483.0",
     "next": "15.1.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-player": "^2.16.0",
     "socket.io-client": "^4.8.1",
     "uuid": "^11.1.0"
   },

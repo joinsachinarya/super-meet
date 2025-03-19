@@ -15,10 +15,10 @@ export default function Home() {
   const router = useRouter();
   const [roomId, setRoomId] = useState('');
   const [copied, setCopied] = useState(false);
-  const [randomRoomId, setRandomRoomId] = useState('');
+  const newRoomId = uuidv4();
+
 
   const createAndJoin = () => {
-    const newRoomId = uuidv4();
     router.push(`/${newRoomId}`);
   };
 
@@ -38,10 +38,6 @@ export default function Home() {
     }
   }, [copied])
 
-  useEffect(() => {
-    setRandomRoomId(randomIdGenerator(10))
-  }, [])
-
   return (
     <>
       <div className='relative'>
@@ -53,13 +49,14 @@ export default function Home() {
           <Image src={Heading} alt='Logo' className='justify-center items-center mt-20 max-md:pt-[10vh] ' />
           <h1 className='py-10'>Because Virtual Meetings Can Be Fun Too!</h1>
           <div className="flex flex-row gap-1 mt-10">
-            <Tippy interactive content={<div className='flex gap-2 items-center'>
-              <span>{randomRoomId}</span>
-              <button className='bg-purple-600 text-white px-2 py-1 rounded-md' onClick={() => {
-                navigator.clipboard.writeText(randomRoomId)
-                setCopied(true)
-              }}> {copied ? "Copied!" : "Copy"}</button>
-            </div>}>
+            <Tippy interactive content={
+              <div className='flex gap-2 items-center whitespace-nowrap'>
+                <span>{newRoomId}</span>
+                <button className='bg-purple-600 text-white px-2 py-1 rounded-md' onClick={() => {
+                  navigator.clipboard.writeText(newRoomId)
+                  setCopied(true)
+                }}> {copied ? "Copied!" : "Copy"}</button>
+              </div>}>
               <input
                 placeholder='Enter Room ID'
                 value={roomId}
