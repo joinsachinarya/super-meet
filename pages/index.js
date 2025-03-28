@@ -7,7 +7,7 @@ import Logo from '../images/logo.svg';
 import Bg from '../images/bg.png';
 import Menu from '../images/menu.png';
 import Heading from '../images/heading.svg';
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 
 export default function Home() {
   const router = useRouter();
