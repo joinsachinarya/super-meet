@@ -7,7 +7,7 @@ import Logo from '../images/logo.svg';
 import Bg from '../images/bg.png';
 import Menu from '../images/menu.png';
 import Heading from '../images/heading.svg';
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 
 export default function Home() {
   const router = useRouter();
@@ -47,14 +47,15 @@ export default function Home() {
           <Image src={Heading} alt='Logo' className='justify-center items-center mt-20 max-md:pt-[10vh] ' />
           <h1 className='py-10'>Because Virtual Meetings Can Be Fun Too!</h1>
           <div className="flex flex-row gap-1 mt-10">
-            <Tippy interactive content={
+            {/* <Tippy interactive content={
               <div className='flex gap-2 items-center whitespace-nowrap'>
                 <span>{newRoomId}</span>
                 <button className='bg-purple-600 text-white px-2 py-1 rounded-md' onClick={() => {
                   navigator.clipboard.writeText(newRoomId)
                   setCopied(true)
                 }}> {copied ? "Copied!" : "Copy"}</button>
-              </div>}>
+              </div>}
+            > */}
               <input
                 placeholder='Enter Room ID'
                 value={roomId}
@@ -66,7 +67,7 @@ export default function Home() {
                   backdropFilter: "blur(5.4px)",
                 }}
               />
-            </Tippy>
+            {/* </Tippy> */}
             <button onClick={joinRoom} className='p-3 bg-purple-600 rounded-tr-xl rounded-br-xl'>Join Room</button>
           </div>
 
