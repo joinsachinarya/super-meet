@@ -1,15 +1,13 @@
 'use client';
 
 import { v4 as uuidv4 } from 'uuid';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
-import Logo from './images/logo.svg';
-import Bg from "./images/bg.png";
-import Menu from './images/menu.png';
-import Heading from './images/heading.svg';
-import { useEffect, useState } from 'react';
-import Tippy from '@tippyjs/react';
-import { randomIdGenerator } from './utils/random-id-generator';
+import Logo from '../images/logo.svg';
+import Bg from '../images/bg.png';
+import Menu from '../images/menu.png';
+import Heading from '../images/heading.svg';
+import { useState } from 'react';
 
 export default function Home() {
   const router = useRouter();
