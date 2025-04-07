@@ -36,6 +36,7 @@ export default function Home() {
     }
   }, [copied])
 
+
   return (
     <div className='relative'>
       <header className='h-[15vh] max-md:h-[10vh] max-md:px-[1vh] max-md:py-[3vh] px-[1vw] py-[1vw]' style={{ display: "flex", justifyContent: "space-between" }}>

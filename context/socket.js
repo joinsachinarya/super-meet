@@ -2,15 +2,12 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
 const SocketContext = createContext(null);
-const URL =
-  process.env.NODE_ENV === "production"
-    ? "https://randommeet-server.onrender.com"
-    : "http://localhost:5000";
+const URL = process.env.NODE_ENV === "production" ? "https://super-meet-sever.onrender.com/" : "http://localhost:5000";
 export const useSocket = () => {
-    const socket = useContext(SocketContext)
-    return socket
+  const socket = useContext(SocketContext)
+  return socket
 }
-  
+
 export const SocketProvider = (props) => {
   const { children } = props;
   const [socket, setSocket] = useState(null);

@@ -1,32 +1,48 @@
 import cx from "classnames";
 import { Mic, Video, Phone, MicOff, VideoOff } from "lucide-react";
 
-import styles from "@/component/Bottom/index.module.css";
-
 const Bottom = (props) => {
   const { muted, playing, toggleAudio, toggleVideo, leaveRoom } = props;
 
   return (
-    <div className={styles.bottomMenu}>
+    <div className="absolute flex justify-between bottom-5 left-0 right-0 mx-auto w-[300px]">
       {muted ? (
         <MicOff
-          className={cx(styles.icon, styles.active)}
+          className={cx(
+            "p-4 rounded-full text-white cursor-pointer bg-secondary hover:bg-buttonPrimary",
+            "bg-buttonPrimary"
+          )}
           size={55}
           onClick={toggleAudio}
         />
       ) : (
-        <Mic className={styles.icon} size={55} onClick={toggleAudio} />
+        <Mic
+          className="p-4 rounded-full text-white cursor-pointer bg-secondary hover:bg-buttonPrimary"
+          size={55}
+          onClick={toggleAudio}
+        />
       )}
       {playing ? (
-        <Video className={styles.icon} size={55} onClick={toggleVideo} />
+        <Video
+          className="p-4 rounded-full text-white cursor-pointer bg-secondary hover:bg-buttonPrimary"
+          size={55}
+          onClick={toggleVideo}
+        />
       ) : (
         <VideoOff
-          className={cx(styles.icon, styles.active)}
+          className={cx(
+            "p-4 rounded-full text-white cursor-pointer bg-secondary hover:bg-buttonPrimary",
+            "bg-buttonPrimary"
+          )}
           size={55}
           onClick={toggleVideo}
         />
       )}
-      <Phone size={55} className={cx(styles.icon1)} onClick={leaveRoom} />
+      <Phone
+        size={55}
+        className="p-4 rounded-full text-white cursor-pointer bg-buttonPrimary"
+        onClick={leaveRoom}
+      />
     </div>
   );
 };
