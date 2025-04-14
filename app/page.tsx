@@ -1,12 +1,12 @@
 'use client';
 
 import { v4 as uuidv4 } from 'uuid';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import Logo from '../images/logo.svg';
-import Bg from '../images/bg.png';
-import Menu from '../images/menu.png';
-import Heading from '../images/heading.svg';
+import Logo from '../public/logo.svg';
+import Bg from '../public/bg.png';
+import Menu from '../public/menu.png';
+import Heading from '../public/heading.svg';
 import { useState , useEffect } from 'react';
 
 export default function Home() {
