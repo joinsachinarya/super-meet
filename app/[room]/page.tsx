@@ -20,7 +20,8 @@ interface Players {
 
 const Room: React.FC = () => {
     const [socket, setSocket] = useState<any>(null);
-    const URL = 'http://localhost:5000'
+    // const URL = 'http://localhost:5000'
+    const URL = 'https://super-meet-backend.onrender.com'
 
     useEffect(() => {
         const connection = io(URL);
