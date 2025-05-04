@@ -27,7 +27,13 @@ const useRoom = () => {
 
 
     useEffect(() => {
-        const connection = io(URL);
+        const connection = io(URL, {
+            withCredentials: true,
+            transports: ['websocket', 'polling'],
+            reconnection: true,
+            reconnectionAttempts: 5,
+            reconnectionDelay: 1000,
+        });
         console.log("socket connection", connection)
         setSocket(connection);
     }, []);
@@ -41,6 +47,7 @@ const useRoom = () => {
     const [peer, setPeer] = useState<Peer | null>(null);
     const [myId, setMyId] = useState<string>("");
     const [users, setUsers] = useState<{ [userId: string]: any }>({});
+    const [screenShareActive, setScreenShareActive] = useState(false);
 
     const isStreamSet = useRef(false);
     const isPeerSet = useRef(false);
@@ -254,6 +261,11 @@ const useRoom = () => {
         }
     };
 
+    const toggleScreenShare = () => {
+        console.log("I toggled my screen share");
+        setScreenShareActive(!screenShareActive);
+    };
+
     const playersCopy = cloneDeep(players);
     const playerHighlighted = playersCopy[myId];
     delete playersCopy[myId];
@@ -266,6 +278,8 @@ const useRoom = () => {
         toggleAudio,
         toggleVideo,
         roomId,
+        toggleScreenShare,
+        screenShareActive,
     }
 }
 

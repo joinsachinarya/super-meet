@@ -6,7 +6,7 @@ import CopySection from "../component/CopySection";
 import useRoom from "../views/room/use-room";
 
 const Room: React.FC = () => {
-    const { players, playerHighlighted, nonHighlightedPlayers, leaveRoom, toggleAudio, toggleVideo, roomId } = useRoom();
+    const { players, playerHighlighted, toggleScreenShare, screenShareActive, nonHighlightedPlayers, leaveRoom, toggleAudio, toggleVideo, roomId } = useRoom();
 
     return (
         <>
@@ -44,6 +44,8 @@ const Room: React.FC = () => {
                 toggleAudio={toggleAudio}
                 toggleVideo={toggleVideo}
                 leaveRoom={leaveRoom}
+                toggleScreenShare={toggleScreenShare}
+                screenShareActive={screenShareActive}
             />
         </>
     );

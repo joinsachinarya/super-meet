@@ -1,7 +1,7 @@
-import { Mic, Video, Phone, MicOff, VideoOff } from "lucide-react";
+import { Mic, Video, Phone, MicOff, VideoOff, ScreenShare, ScreenShareOff } from "lucide-react";
 
 const Bottom = (props) => {
-  const { muted, playing, toggleAudio, toggleVideo, leaveRoom } = props;
+  const { muted, playing, toggleAudio, toggleVideo, leaveRoom, toggleScreenShare, screenShareActive } = props;
 
   return (
     <div className="absolute flex justify-between bottom-5 left-0 right-0 mx-auto w-[300px]">
@@ -31,6 +31,20 @@ const Bottom = (props) => {
           onClick={toggleVideo}
         />
       )}
+      {!screenShareActive ? (
+        <ScreenShareOff
+          size={55}
+          className="p-4 rounded-full text-white cursor-pointer bg-secondary hover:bg-buttonPrimary"
+          onClick={toggleScreenShare}
+        />
+      ) : (
+        <ScreenShare
+          size={55}
+          className="p-4 rounded-full text-white cursor-pointer bg-buttonPrimary"
+          onClick={toggleScreenShare}
+        />
+      )}
+      
       <Phone
         size={55}
         className="p-4 rounded-full text-white cursor-pointer bg-buttonPrimary"
