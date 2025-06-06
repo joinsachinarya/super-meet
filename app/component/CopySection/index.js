@@ -14,10 +14,10 @@ const CopySection = (props) => {
   };
 
   return (
-    <div className="flex flex-col absolute text-white border border-white rounded p-2 left-[30px] bottom-[100px]">
+    <div className="hidden md:flex flex-col fixed text-white border border-white rounded-xl p-2 left-[30px] bottom-[100px] bg-black/70 shadow-lg max-md:w-[90vw] max-md:left-1/2 max-md:-translate-x-1/2 max-md:bottom-4 max-md:text-center z-30">
       <div className="text-base">Copy Room ID:</div>
       <hr className="my-1" />
-      <div className="flex items-center text-sm">
+      <div className="flex items-center justify-center text-sm gap-2">
         <span>{roomId}</span>
         {copied ? <Check className="ml-3 cursor-pointer" /> : <Copy className="ml-3 cursor-pointer" onClick={handleCopy} />}
       </div>

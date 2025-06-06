@@ -14,11 +14,13 @@ const Player = (props) => {
   return (
     <div
       className={cx(
-        "relative overflow-hidden mb-5 h-full flex items-center justify-center",
-        {
-          "rounded-lg": isActive,
-          "rounded-md h-min w-[200px] shadow-[0px_0px_11px_-1px_rgba(0,0,0,0.75)]": !isActive,        }
+        " relative overflow-hidden mb-5 flex items-center justify-center bg-black/70 rounded-2xl",
+        "w-full",
+        isActive
+          ? "max-w-[700px] max-h-[60vh] min-h-[200px] md:min-h-[400px] mx-auto"
+          : "max-w-[95vw] max-h-[40vh] min-h-[120px] md:min-h-[200px] mx-auto my-2"
       )}
+      style={{ aspectRatio: isActive ? '16/9' : '4/3' }}
     >
       {playing && !hasError ? (
         <ReactPlayer
@@ -27,20 +29,21 @@ const Player = (props) => {
           playing={playing}
           width="100%"
           height="100%"
+          className="rounded-2xl"
           onError={handleError}
         />
       ) : (
         <UserSquare2
           className="text-white"
-          size={isActive ? 400 : 150}
+          size={isActive ? (window.innerWidth < 768 ? 180 : 400) : (window.innerWidth < 768 ? 60 : 150)}
         />
       )}
 
       {!isActive && (
         muted ? (
-          <MicOff className="text-white absolute right-2 bottom-2" size={20} />
+          <MicOff className="text-white absolute right-2 bottom-2" size={window.innerWidth < 768 ? 14 : 20} />
         ) : (
-          <Mic className="text-white absolute right-2 bottom-2" size={20} />
+          <Mic className="text-white absolute right-2 bottom-2" size={window.innerWidth < 768 ? 14 : 20} />
         )
       )}
     </div>

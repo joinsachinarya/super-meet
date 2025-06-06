@@ -48,6 +48,9 @@ const useRoom = () => {
     const [myId, setMyId] = useState<string>("");
     const [users, setUsers] = useState<{ [userId: string]: any }>({});
     const [screenShareActive, setScreenShareActive] = useState(false);
+    const [originalStream, setOriginalStream] = useState<MediaStream | null>(null);
+    const [isScreenSharing, setIsScreenSharing] = useState(false);
+    const [screenSharer, setScreenSharer] = useState<string | null>(null);
 
     const isStreamSet = useRef(false);
     const isPeerSet = useRef(false);
@@ -216,12 +219,39 @@ const useRoom = () => {
         }));
     }, [myId, localStream]);
 
+    useEffect(() => {
+        if (!socket) return;
+        // Listen for screen share events from others
+        const handleScreenShareStarted = (userId: string) => {
+            setScreenSharer(userId);
+            if (userId !== myId) {
+                setScreenShareActive(false);
+            }
+        };
+        const handleScreenShareStopped = () => {
+            setScreenSharer(null);
+        };
+        socket.on("screen-share-started", handleScreenShareStarted);
+        socket.on("screen-share-stopped", handleScreenShareStopped);
+        return () => {
+            socket.off("screen-share-started", handleScreenShareStarted);
+            socket.off("screen-share-stopped", handleScreenShareStopped);
+        };
+    }, [socket, myId]);
+
     const leaveRoom = () => {
         try {
             socket.emit("leave", roomId, myId);
             console.log("Leaving room", roomId);
             if (peer) {
                 peer.disconnect();
+            }
+            // Stop all media tracks
+            if (stateStream) {
+                stateStream.getTracks().forEach(track => track.stop());
+            }
+            if (originalStream) {
+                originalStream.getTracks().forEach(track => track.stop());
             }
             router.push("/");
         } catch (error) {
@@ -261,9 +291,40 @@ const useRoom = () => {
         }
     };
 
-    const toggleScreenShare = () => {
-        console.log("I toggled my screen share");
-        setScreenShareActive(!screenShareActive);
+    const toggleScreenShare = async () => {
+        if (!isScreenSharing) {
+            // Start screen sharing
+            if (screenSharer && screenSharer !== myId) {
+                alert("Someone else is already sharing their screen.");
+                return;
+            }
+            try {
+                const displayStream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true });
+                setOriginalStream(stateStream);
+                setStateStream(displayStream);
+                setScreenShareActive(true);
+                setIsScreenSharing(true);
+                socket.emit("screen-share-started", roomId, myId);
+                // Listen for when the user stops sharing from browser UI
+                displayStream.getVideoTracks()[0].onended = () => {
+                    stopScreenShare();
+                };
+            } catch (err) {
+                console.error("Error starting screen share", err);
+            }
+        } else {
+            stopScreenShare();
+        }
+    };
+
+    const stopScreenShare = () => {
+        if (originalStream) {
+            setStateStream(originalStream);
+        }
+        setScreenShareActive(false);
+        setIsScreenSharing(false);
+        setScreenSharer(null);
+        socket.emit("screen-share-stopped", roomId, myId);
     };
 
     const playersCopy = cloneDeep(players);
@@ -280,6 +341,10 @@ const useRoom = () => {
         roomId,
         toggleScreenShare,
         screenShareActive,
+        isScreenSharing,
+        screenSharer,
+        socket,
+        myId,
     }
 }
 
